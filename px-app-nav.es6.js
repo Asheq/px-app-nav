@@ -757,7 +757,13 @@
      * @return {Boolean}
      */
     _isItemSelected(item, selectedItem) {
-      return item && selectedItem && item === selectedItem;
+      if (item && selectedItem && item === selectedItem) {
+        return true
+      }
+      if (item && item.children && item.children.includes(selectedItem)) {
+        return true
+      }
+      return false
     },
 
     /**

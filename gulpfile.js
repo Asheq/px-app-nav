@@ -81,11 +81,15 @@ gulp.task('watch', function() {
 gulp.task('serve', function() {
   browserSync.init({
     port: 8080,
-    notify: false,
-    reloadOnRestart: true,
     logPrefix: `${pkg.name}`,
     https: false,
     server: ['./', 'bower_components'],
+    reloadOnRestart: false,
+    watch: false,
+    notify: false,
+    reloadDebounce: 500000000, // disable!
+    reloadDelay: 500000000, // disable!
+    ui: false,
   });
 
   gulp.watch(['css/*-styles.html', '*.html', '*.js', 'demo/*.html']).on('change', browserSync.reload);

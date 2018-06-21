@@ -125,7 +125,9 @@ limitations under the License.
        */
       props: {
         type: Object,
-        value: function () { return this.demoProps; }
+        value: function() {
+          return this.demoProps;
+        }
       },
 
       /**
@@ -139,26 +141,24 @@ limitations under the License.
        */
       configs: {
         type: Array,
-        value: function () {
-          return [
-            {
-              configName: "Horizontal",
-              configReset: true
-            }, {
-              configName: "Vertical",
-              vertical: true,
-              configReset: true
-            }, {
-              configName: "Collapsed All",
-              collapseAll: true,
-              configReset: true
-            }, {
-              configName: "Collapsed At",
-              collapseAll: null,
-              collapseAt: 500,
-              configReset: true
-            }
-          ]
+        value: function() {
+          return [{
+            configName: "Horizontal",
+            configReset: true
+          }, {
+            configName: "Vertical",
+            vertical: true,
+            configReset: true
+          }, {
+            configName: "Collapsed All",
+            collapseAll: true,
+            configReset: true
+          }, {
+            configName: "Collapsed At",
+            collapseAll: null,
+            collapseAt: 500,
+            configReset: true
+          }]
         }
       }
     },
@@ -169,20 +169,77 @@ limitations under the License.
     demoProps: {
       items: {
         type: Array,
-        defaultValue: [
-          { "label" : "Home",   "id" : "home",   "icon" : "px-fea:home" },
-          { "label" : "Alerts", "id" : "alerts", "icon" : "px-fea:alerts",
-            "metadata" : { "openCases" : "12", "closedCases" : "82" }
+        defaultValue: [{
+            "label": "Production Planning",
+            "id": "production",
+            "icon": "px-fea:dashboard",
+            "children": [{
+              "label": "Gas Nomination Advisor",
+              "id": "gna",
+              "icon": "px-obj:line-og",
+            }, {
+              "label": "Operating Envelope Advisor",
+              "icon": "px-fea:orchestration",
+              "id": "oea",
+              "children": [{
+                "label": "Main",
+                "id": "oeam"
+              }, {
+                "label": "Plant Information",
+                "id": "oeapi"
+              }],
+            }, {
+              "label": "MW Pricing Advisor",
+              "icon": "px-fea:analytics",
+              "id": "mwpa",
+              "children": [{
+                "label": "Main",
+                "id": "mwpam"
+              }, {
+                "label": "Turndown vs. Shutdown",
+                "id": "mwpats",
+              }, {
+                "label": "Peak Fire",
+                "id": "mwpapf"
+              }, {
+                "label": "Advisor Defaults",
+                "id": "mwpaad"
+              }],
+            }, {
+              "label": "Economic Dispatch Advisor",
+              "icon": "px-fea:orders",
+              "id": "eda"
+            }]
           },
-          { "label" : "Assets", "id" : "assets", "icon" : "px-fea:asset", "children": [
-            { "label" : "Asset #1", "id" : "a1" },
-            { "label" : "Asset #2", "id" : "a2" }
-          ] },
-          { "label" : "Dashboards", "id" : "dashboards", "icon" : "px-fea:dashboard", "children": [
-            { "label" : "See Live Truck View", "id" : "trucks", "icon" : "px-obj:truck" },
-            { "label" : "Track Orders", "id" : "orders", "icon" : "px-fea:orders" },
-            { "label" : "Analyze Invoices", "id" : "invoices", "icon" : "px-fea:templates" }
-          ]}
+          {
+            "label": "Home",
+            "id": "home",
+            "icon": "px-fea:home"
+          },
+          {
+            "label": "Alerts",
+            "id": "alerts",
+            "icon": "px-fea:alerts",
+            "metadata": {
+              "openCases": "12",
+              "closedCases": "82"
+            }
+          },
+          {
+            "label": "Assets",
+            "id": "assets",
+            "icon": "px-fea:asset",
+            "children": [{
+                "label": "Asset #1",
+                "id": "a1"
+              },
+              {
+                "label": "Asset #2",
+                "id": "a2"
+              }
+            ]
+          },
+
         ],
         inputType: 'code:JSON'
       },
@@ -221,7 +278,7 @@ limitations under the License.
 
     },
 
-    observers: [ '_returnPos(props.vertical.value)' ],
+    observers: ['_returnPos(props.vertical.value)'],
 
 
     listeners: {
@@ -231,7 +288,7 @@ limitations under the License.
 
     attached: function() {
       var div = this.$.demoComponent,
-          nav = this.$.appNav;
+        nav = this.$.appNav;
       nav.set('fitInto', div);
 
       window.requestAnimationFrame(function() {
@@ -253,7 +310,7 @@ limitations under the License.
 
     _returnPos: function(vertical) {
       var div = this.$$('#wrapper');
-      if(vertical) {
+      if (vertical) {
         div.style.top = '10px';
         div.style.left = '90px';
       } else {
@@ -263,4 +320,5 @@ limitations under the License.
     }
 
   });
+
 </script>
